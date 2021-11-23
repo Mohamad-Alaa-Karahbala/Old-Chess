@@ -33,31 +33,28 @@ public class Baseboard extends JPanel implements ActionListener {
     public void paintboard (Graphics g){
         int x = 0;
         int y = 0;
-        while (y <= ScreenHeight){
+        boolean i = false;
+        while (y < ScreenHeight){
             g.fillRect(x, y, BlockSizeW, BlockSizeH);
-            x = x + 2*BlockSizeW;
-            if(x <= 800){
+            x += 2 * BlockSizeW;
+            if(x/BlockSizeW >= ScreenWidth/BlockSizeW){
                 y = y + BlockSizeH;
-                int i = 0;
-                if (i == 0){
-                    x = BlockSizeW;
-                    i++;
-                }
-                else if(x == 1){
+                if (i){
                     x = 0;
-                    i--;
+                    i = false;
+                }
+                else {
+                    x = BlockSizeW;
+                    i = true;
                 }
             }
-            System.out.println(x == 800);
-            System.out.println(x);
-            System.out.println(y);
+
         }
+
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
-
 
     }
 
@@ -69,13 +66,13 @@ public class Baseboard extends JPanel implements ActionListener {
         public void componentHidden(ComponentEvent e) {}
         public void componentMoved(ComponentEvent e) {}
         public void componentShown(ComponentEvent e) {}
-
         public void componentResized(ComponentEvent e) {
             Dimension newSize = e.getComponent().getBounds().getSize();
             h = newSize.height;
             w = newSize.width;
             Baseboard.ScreenWidth = w;
             Baseboard.ScreenHeight = h;
+
 
         }
 
