@@ -31,38 +31,33 @@ public class Baseboard extends JPanel implements ActionListener {
     }
 
     public void paintboard (Graphics g){
-        for (int i = 0; i < 8; i++) {
-            g.drawLine(i*ScreenHeight/8,0,i*ScreenHeight/8, ScreenHeight);
-            g.drawLine(0,i*ScreenWidth/8,ScreenWidth, i*ScreenWidth/8);
-        }
-        for (int i = 0; i < 8; i = i + 1) {
-            g.fillRect(i*ScreenHeight/8 ,i*ScreenWidth/8,ScreenHeight/8 ,ScreenWidth/8);
-        }
-        for (int i = 0; i < 6; i = i + 1) {
-            g.fillRect(i*ScreenHeight/8+200 ,i*ScreenWidth/8,ScreenHeight/8 ,ScreenWidth/8);
-        }
-        for (int i = 0; i < 4; i = i + 1) {
-            g.fillRect(i*ScreenHeight/8+400 ,i*ScreenWidth/8,ScreenHeight/8 ,ScreenWidth/8);
-        }
-        for (int i = 0; i < 2; i = i + 1) {
-            g.fillRect(i*ScreenHeight/8+600 ,i*ScreenWidth/8,ScreenHeight/8 ,ScreenWidth/8);
-        }
-        for (int i = 0; i < 6; i = i + 1) {
-            g.fillRect(i*ScreenHeight/8,i*ScreenWidth/8+200 ,ScreenHeight/8 ,ScreenWidth/8);
-        }
-        for (int i = 0; i < 4; i = i + 1) {
-            g.fillRect(i*ScreenHeight/8 ,i*ScreenWidth/8+400,ScreenHeight/8 ,ScreenWidth/8);
-        }
-        for (int i = 0; i < 2; i = i + 1) {
-            g.fillRect(i*ScreenHeight/8 ,i*ScreenWidth/8+600,ScreenHeight/8 ,ScreenWidth/8);
+        int x = 0;
+        int y = 0;
+        while (y <= ScreenHeight){
+            g.fillRect(x, y, BlockSizeW, BlockSizeH);
+            x = x + 2*BlockSizeW;
+            if(x <= 800){
+                y = y + BlockSizeH;
+                int i = 0;
+                if (i == 0){
+                    x = BlockSizeW;
+                    i++;
+                }
+                else if(x == 1){
+                    x = 0;
+                    i--;
+                }
+            }
+            System.out.println(x == 800);
+            System.out.println(x);
+            System.out.println(y);
         }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
 
-//        System.out.println("the high is" + this.getSize().height);
-//        System.out.println("the width is" + this.getSize().width);
+
 
     }
 
