@@ -17,11 +17,13 @@ public class Baseboard extends JPanel implements ActionListener {
     public int BlockSizeW = ScreenWidth/8;
 
 
+
     Baseboard(){
         this.setPreferredSize(new Dimension(ScreenWidth, ScreenHeight));
         Timer timer = new Timer(1000,this);
         timer.start();
         this.setBackground(Color.BLACK);
+        this.addComponentListener(new ResizeListener());
 
     }
 
@@ -31,13 +33,15 @@ public class Baseboard extends JPanel implements ActionListener {
     }
 
     public void paintboard (Graphics g){
+     BlockSizeH = ScreenHeight/8;
+     BlockSizeW = ScreenWidth/8;
         int x = 0;
         int y = 0;
         boolean i = false;
-        while (y < ScreenHeight){
+        while (y/BlockSizeH < 8){
             g.fillRect(x, y, BlockSizeW, BlockSizeH);
             x += 2 * BlockSizeW;
-            if(x/BlockSizeW >= ScreenWidth/BlockSizeW){
+            if(x/BlockSizeW >= 8){
                 y = y + BlockSizeH;
                 if (i){
                     x = 0;
@@ -70,9 +74,10 @@ public class Baseboard extends JPanel implements ActionListener {
             Dimension newSize = e.getComponent().getBounds().getSize();
             h = newSize.height;
             w = newSize.width;
+            System.out.println("Resized");
             Baseboard.ScreenWidth = w;
             Baseboard.ScreenHeight = h;
-
+            repaint();
 
         }
 
