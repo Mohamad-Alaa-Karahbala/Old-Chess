@@ -10,36 +10,43 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 
 
+
 public class Baseboard extends JPanel implements ActionListener {
     public static int ScreenWidth = 800;
     public static int ScreenHeight = 800;
     public int BlockSizeH = ScreenHeight/8;
     public int BlockSizeW = ScreenWidth/8;
 
+    public String[] figuresNames;
 
 
-    Baseboard(){
+    public Baseboard(){
         this.setPreferredSize(new Dimension(ScreenWidth, ScreenHeight));
         Timer timer = new Timer(1000,this);
         timer.start();
         this.setBackground(Color.BLACK);
         this.addComponentListener(new ResizeListener());
-
     }
 
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         paintboard(g);
+
     }
 
-    public void paintboard (Graphics g){
-     BlockSizeH = ScreenHeight/8;
-     BlockSizeW = ScreenWidth/8;
+    public void pos(){
+         int[] positions;
+    }
+
+    public void paintboard (Graphics g) {
+        BlockSizeH = ScreenHeight/8;
+        BlockSizeW = ScreenWidth/8;
         int x = 0;
         int y = 0;
         boolean i = false;
         while (y/BlockSizeH < 8){
             g.fillRect(x, y, BlockSizeW, BlockSizeH);
+            drawFigures(g, x, y);
             x += 2 * BlockSizeW;
             if(x/BlockSizeW >= 8){
                 y = y + BlockSizeH;
@@ -56,6 +63,13 @@ public class Baseboard extends JPanel implements ActionListener {
         }
 
     }
+    public void drawFigures(Graphics g,int x, int y){
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        //not finished
+        Image image = toolkit.getImage("figures/PawnW.png");
+        g.drawImage(image, x, y, BlockSizeW, BlockSizeH, this);
+        repaint();
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -66,18 +80,20 @@ public class Baseboard extends JPanel implements ActionListener {
         int h;
         int w;
 
-
         public void componentHidden(ComponentEvent e) {}
         public void componentMoved(ComponentEvent e) {}
         public void componentShown(ComponentEvent e) {}
         public void componentResized(ComponentEvent e) {
+
             Dimension newSize = e.getComponent().getBounds().getSize();
             h = newSize.height;
             w = newSize.width;
-            System.out.println("Resized");
             Baseboard.ScreenWidth = w;
             Baseboard.ScreenHeight = h;
             repaint();
+            if (h != w){
+            e.getComponent().getBounds().setSize(ScreenWidth,ScreenHeight);
+            }
 
         }
 
