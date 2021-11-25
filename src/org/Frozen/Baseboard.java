@@ -32,15 +32,25 @@ public class Baseboard extends JPanel implements ActionListener {
         super.paintComponent(g);
         paintboard(g);
 
+
     }
 
     public void pos(){
-         int[] positions;
+         int[] positionsX = new int[9];
+         int[] positionsY = new int[9];
+         for (int i = 1; i<=8;i++){
+         positionsX[i] = i*BlockSizeW;
+
+         }
+        for (int i = 1; i<=8;i++){
+            positionsY[i] = i*BlockSizeH;
+
+        }
+         
     }
 
     public void paintboard (Graphics g) {
-        BlockSizeH = ScreenHeight/8;
-        BlockSizeW = ScreenWidth/8;
+
         int x = 0;
         int y = 0;
         boolean i = false;
@@ -90,6 +100,8 @@ public class Baseboard extends JPanel implements ActionListener {
             w = newSize.width;
             Baseboard.ScreenWidth = w;
             Baseboard.ScreenHeight = h;
+            BlockSizeH = ScreenHeight/8;
+            BlockSizeW = ScreenWidth/8;
             repaint();
             if (h != w){
             e.getComponent().getBounds().setSize(ScreenWidth,ScreenHeight);
