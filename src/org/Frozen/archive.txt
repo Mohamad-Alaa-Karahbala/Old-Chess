@@ -47,5 +47,10 @@ public class archive {
         }
     }
 
+        public void setfigures(Graphics g, Dimension dimension, String figure){
+            Toolkit toolkit = Toolkit.getDefaultToolkit();
+            Image image = toolkit.getImage(figure);
+            g.drawImage(image, dimension.width+(Patches.BlockSizeW/10), dimension.height+(Patches.BlockSizeH/10), Patches.BlockSizeW-2*(Patches.BlockSizeW/10), Patches.BlockSizeH-2*(Patches.BlockSizeH/10), this);
+        }
 
 }

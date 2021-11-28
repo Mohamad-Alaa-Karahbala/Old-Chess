@@ -2,13 +2,11 @@ package org.Frozen;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
-public class Patches extends JLabel implements MouseListener {
+public class Patches extends JPanel implements MouseListener {
     public static int ScreenWidth = Baseboard.ScreenWidth;
     public static int ScreenHeight = Baseboard.ScreenHeight;
     public static int BlockSizeH = Baseboard.BlockSizeH;
@@ -16,8 +14,10 @@ public class Patches extends JLabel implements MouseListener {
     public static Dimension[] patch = new Dimension[65];
     ArrayList<Integer> blackPatches = new ArrayList<Integer>(65);
     ArrayList<Integer> whitePatches = new ArrayList<Integer>(65);
-    public static ArrayList<JLabel> blackPatch = new ArrayList<JLabel>(64);
-    public static ArrayList<JLabel> whitePatch = new ArrayList<JLabel>(64);
+    ArrayList<Integer> allPatches = new ArrayList<Integer>(65);
+    public static ArrayList<JLabel> blackPatch = new ArrayList<JLabel>(65);
+    public static ArrayList<JLabel> whitePatch = new ArrayList<JLabel>(65);
+    public static ArrayList<JPanel> allPatch = new ArrayList<JPanel>(65);
     public boolean selected = false;
 
     public Patches() {
@@ -46,6 +46,7 @@ public class Patches extends JLabel implements MouseListener {
     public void setPatches() {
         numPatch();
         for (int i = 1; i <= 64; i++) {
+                    allPatches.add(i);
             switch (i) {
                 case 1, 3, 5, 7, 10, 12, 14, 16, 17, 19, 21, 23, 26, 28, 30, 32, 33, 35, 37, 39, 42, 44, 46, 48, 49, 51, 53, 55, 58, 60, 62, 64:
                     whitePatches.add(i);
@@ -54,35 +55,23 @@ public class Patches extends JLabel implements MouseListener {
                     blackPatches.add(i);
                     break;
             }
-        }
-        for (int i = 0; i <= 31; i++) {
-            int indexW;
-            int indexB;
-            indexW = whitePatches.get(i);
-            indexB = blackPatches.get(i);
-            if (indexB == blackPatches.get(i)) {
-                JLabel bLabel = new JLabel();
-                if (!selected) {
-                    bLabel.setBackground(Color.darkGray);
-                }
-                else {
-                    bLabel.setBackground(Color.YELLOW);
-                }
-                bLabel.setOpaque(true);
-                bLabel.setBounds(patch[indexB].width, patch[indexB].height, BlockSizeW, BlockSizeH);
-                blackPatch.add(bLabel);
-                this.add(blackPatch.get(i));
-            }
 
-            if (indexW == whitePatches.get(i)) {
-                JLabel wLabel = new JLabel();
-                wLabel.setBackground(Color.lightGray);
-                wLabel.setOpaque(true);
-                wLabel.setBounds(patch[indexW].width, patch[indexW].height, BlockSizeW, BlockSizeH);
-                whitePatch.add(wLabel);
-                this.add(whitePatch.get(i));
+            JPanel jPanel = new JPanel();
+            if (whitePatches.contains(i)){
+                jPanel.setBackground(Color.gray);
             }
+            if (blackPatches.contains(i)){
+                jPanel.setBackground(Color.DARK_GRAY);
+            }
+            jPanel.setOpaque(true);
+
+            jPanel.setBounds(patch[i].width,patch[i].height,BlockSizeW,BlockSizeH);
+            System.out.println(jPanel.getBounds());
+            allPatch.add(jPanel);
+
+
         }
+
     }
 
 
@@ -104,12 +93,12 @@ public class Patches extends JLabel implements MouseListener {
     @Override
     public void mouseEntered(MouseEvent e) {
         selected =  true;
-        System.out.println(selected);
-        setPatches();
+        e.getComponent().setBackground(Color.YELLOW);
+        System.out.println("you enterd");
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-
+        e.getComponent().setBackground(Color.black);
     }
 }
