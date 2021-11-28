@@ -3,8 +3,8 @@ package org.Frozen;
 import javax.swing.*;
 
 public class Frame extends JFrame {
-    Frame(){
 
+       public Frame(){
         this.add(new Baseboard());
         this.setTitle("Chess");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);

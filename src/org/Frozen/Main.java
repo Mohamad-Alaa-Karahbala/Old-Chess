@@ -1,14 +1,14 @@
 package org.Frozen;
 
-public class Main {
+import javax.swing.*;
+
+public class Main extends JFrame {
+
+     public static Frame frame;
 
     public static void main(String[] args) {
-        new Frame();
+        frame = new Frame();
 
 
-
-        // Chess Game
-
-        // Last Test
     }
 }
