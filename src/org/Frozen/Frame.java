@@ -6,11 +6,12 @@ public class Frame extends JFrame {
 
        public Frame(){
             this.setTitle("Chess");
-            this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+            this.setSize(Patches.ScreenWidth,Patches.ScreenHeight);
+            this.setLayout(null);
             this.setLocationRelativeTo(null);
-            this.setResizable(true);
             this.setVisible(true);
-
+            this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+            this.setResizable(true);
        }
 
 }

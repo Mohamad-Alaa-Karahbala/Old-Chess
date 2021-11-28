@@ -1,10 +1,14 @@
 package org.Frozen;
 
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 
 public class Baseboard{
@@ -24,7 +28,7 @@ public class Baseboard{
 
     public void drawfigures(){
 
-        for (int i = 1;i <= 63;i++){
+        for (int i = 1;i <= 64;i++){
             switch (i) {
                 case 1,8:
                     setfigures(i ,"figures/RookB.png");
@@ -70,13 +74,20 @@ public class Baseboard{
 
 
     public static void setfigures( int i, String figure){
-
-        ImageIcon imageIcon = new ImageIcon(figure);
         JLabel jLabel = new JLabel();
+        BufferedImage img = null;
+        try {
+            img = ImageIO.read(new File(figure));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Image dimg = img.getScaledInstance(BlockSizeW-BlockSizeW/10, BlockSizeH-BlockSizeH/10, Image.SCALE_SMOOTH);
+        ImageIcon imageIcon = new ImageIcon(dimg);
         jLabel.setIcon(imageIcon);
         jLabel.setVerticalAlignment(JLabel.CENTER);
         jLabel.setHorizontalAlignment(JLabel.CENTER);
-        Patches.allPatch.get(i).add(jLabel);
+        Patches.allPatch.get(i-1).add(jLabel);
+        System.out.println(Patches.allPatch.get(63).getBounds());
 
 
 

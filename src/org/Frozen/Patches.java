@@ -18,20 +18,30 @@ public class Patches extends JPanel implements MouseListener {
     public static ArrayList<JLabel> blackPatch = new ArrayList<JLabel>(65);
     public static ArrayList<JLabel> whitePatch = new ArrayList<JLabel>(65);
     public static ArrayList<JPanel> allPatch = new ArrayList<JPanel>(65);
+    public Color patchColor = new Color(0x000000);
     public boolean selected = false;
+
+
 
     public Patches() {
         this.setPreferredSize(new Dimension(ScreenWidth, ScreenHeight));
         this.setBackground(Color.BLACK);
-        this.addMouseListener(this);
         setPatches();
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
+
+    public void setPatchColor(Color patchColor) {
+        this.patchColor = patchColor;
     }
 
     public void numPatch(){
         int x = 0;
         int y = 0;
         int index = 0;
-        while (y/BlockSizeH < 8){
+        while (y/BlockSizeH <= 7){
             index++;
             patch[index] = new Dimension(x,y);
             x += BlockSizeW;
@@ -58,15 +68,18 @@ public class Patches extends JPanel implements MouseListener {
 
             JPanel jPanel = new JPanel();
             if (whitePatches.contains(i)){
-                jPanel.setBackground(Color.gray);
+                setPatchColor(Color.GRAY);
+
             }
             if (blackPatches.contains(i)){
-                jPanel.setBackground(Color.DARK_GRAY);
+                setPatchColor(Color.DARK_GRAY);
             }
-            jPanel.setOpaque(true);
-
+            if (selected){
+                setPatchColor(Color.YELLOW);
+            }
+            jPanel.setBackground(patchColor);
             jPanel.setBounds(patch[i].width,patch[i].height,BlockSizeW,BlockSizeH);
-            System.out.println(jPanel.getBounds());
+            jPanel.addMouseListener(this);
             allPatch.add(jPanel);
 
 
@@ -93,12 +106,11 @@ public class Patches extends JPanel implements MouseListener {
     @Override
     public void mouseEntered(MouseEvent e) {
         selected =  true;
-        e.getComponent().setBackground(Color.YELLOW);
-        System.out.println("you enterd");
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        e.getComponent().setBackground(Color.black);
+        selected = false;
+
     }
 }

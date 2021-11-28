@@ -13,7 +13,6 @@ public class Main{
             frame.add(Patches.allPatch.get(i));
         }
         new Baseboard();
-        frame.pack();
 
 
 
