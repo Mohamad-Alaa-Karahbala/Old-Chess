@@ -39,10 +39,10 @@ public class Baseboard{
                 case 3,6:
                     setfigures(i ,"figures/BishopB.png");
                     break;
-                case 4:
+                case 5:
                     setfigures(i ,"figures/KingB.png");
                     break;
-                case 5:
+                case 4:
                     setfigures(i ,"figures/QweenB.png");
                     break;
                 case 49,50,51,52,53,54,55,56:
@@ -57,10 +57,10 @@ public class Baseboard{
                 case 59,62:
                     setfigures(i ,"figures/BishopW.png");
                     break;
-                case 60:
+                case 61:
                     setfigures(i ,"figures/KingW.png");
                     break;
-                case 61:
+                case 60:
                     setfigures(i ,"figures/QweenW.png");
                     break;
                 case 9,10,11,12,13,14,15,16:
@@ -87,6 +87,7 @@ public class Baseboard{
         jLabel.setVerticalAlignment(JLabel.CENTER);
         jLabel.setHorizontalAlignment(JLabel.CENTER);
         Patches.allPatch.get(i-1).add(jLabel);
+        Patches.patches.get(i-1).setBusy(true);
         System.out.println(Patches.allPatch.get(63).getBounds());
 
 

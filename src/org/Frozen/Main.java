@@ -11,10 +11,10 @@ public class Main{
         frame = new Frame();
         for (int i = 0;i <= 63;i++){
             frame.add(Patches.allPatch.get(i));
+            System.out.println(Patches.allPatch.get(i));
         }
         new Baseboard();
-
-
+        frame.setVisible(true);
 
     }
 }

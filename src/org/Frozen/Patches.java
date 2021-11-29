@@ -2,21 +2,18 @@ package org.Frozen;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
-public class Patches extends JPanel implements MouseListener {
+public class Patches extends JPanel {
     public static int ScreenWidth = Baseboard.ScreenWidth;
     public static int ScreenHeight = Baseboard.ScreenHeight;
     public static int BlockSizeH = Baseboard.BlockSizeH;
     public static int BlockSizeW = Baseboard.BlockSizeW;
-    public static Dimension[] patch = new Dimension[65];
+    public Dimension[] patchD = new Dimension[65];
     ArrayList<Integer> blackPatches = new ArrayList<Integer>(65);
     ArrayList<Integer> whitePatches = new ArrayList<Integer>(65);
     ArrayList<Integer> allPatches = new ArrayList<Integer>(65);
-    public static ArrayList<JLabel> blackPatch = new ArrayList<JLabel>(65);
-    public static ArrayList<JLabel> whitePatch = new ArrayList<JLabel>(65);
+    public static ArrayList<Patch> patches = new ArrayList<Patch>(64);
     public static ArrayList<JPanel> allPatch = new ArrayList<JPanel>(65);
     public Color patchColor = new Color(0x000000);
     public boolean selected = false;
@@ -24,8 +21,6 @@ public class Patches extends JPanel implements MouseListener {
 
 
     public Patches() {
-        this.setPreferredSize(new Dimension(ScreenWidth, ScreenHeight));
-        this.setBackground(Color.BLACK);
         setPatches();
     }
 
@@ -43,7 +38,7 @@ public class Patches extends JPanel implements MouseListener {
         int index = 0;
         while (y/BlockSizeH <= 7){
             index++;
-            patch[index] = new Dimension(x,y);
+            patchD[index] = new Dimension(x,y);
             x += BlockSizeW;
             if(x/BlockSizeW >= 8){
                 y = y + BlockSizeH;
@@ -66,21 +61,16 @@ public class Patches extends JPanel implements MouseListener {
                     break;
             }
 
-            JPanel jPanel = new JPanel();
+            Patch patch = new Patch(patchD[i],BlockSizeW,BlockSizeH);
             if (whitePatches.contains(i)){
-                setPatchColor(Color.GRAY);
-
+                patch.getjPanel().setBackground(Color.gray);
             }
             if (blackPatches.contains(i)){
-                setPatchColor(Color.DARK_GRAY);
+                patch.getjPanel().setBackground(Color.DARK_GRAY);
             }
-            if (selected){
-                setPatchColor(Color.YELLOW);
-            }
-            jPanel.setBackground(patchColor);
-            jPanel.setBounds(patch[i].width,patch[i].height,BlockSizeW,BlockSizeH);
-            jPanel.addMouseListener(this);
-            allPatch.add(jPanel);
+            patches.add(patch);
+            allPatch.add(patch.getjPanel());
+
 
 
         }
@@ -88,29 +78,4 @@ public class Patches extends JPanel implements MouseListener {
     }
 
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-        selected =  true;
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-        selected = false;
-
-    }
-}
+   }
