@@ -5,6 +5,7 @@ public class Main{
 
      public static Frame frame;
      public static Patches patches;
+     public static Baseboard baseboard;
 
     public static void main(String[] args) {
         patches = new Patches();
@@ -13,7 +14,7 @@ public class Main{
             frame.add(Patches.allPatch.get(i));
             System.out.println(Patches.allPatch.get(i));
         }
-        new Baseboard();
+        baseboard = new Baseboard();
         frame.setVisible(true);
 
     }

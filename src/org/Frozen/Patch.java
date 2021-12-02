@@ -50,10 +50,23 @@ public class Patch extends JPanel implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if (selected){
-            this.setSelected(false);
+        if (!Patches.mode){
+            for (int i = 0;i <= 63; i++){
+                if (Patches.patches.get(i).getjPanel() == e.getComponent()){
+                    System.out.println("1");
+                    Patches.first = i;
+                }
+            }
+        }else {
+            for (int i = 0;i <= 63; i++){
+                if (Patches.patches.get(i).getjPanel() == e.getComponent()) {
+                    System.out.println("2");
+                    Patches.second = i;
+                    Main.baseboard.move(Patches.first,Patches.second);
+                }
+            }
         }
-        else this.setSelected(true);
+        Patches.mode = !Patches.mode;
     }
 
     @Override
@@ -68,16 +81,18 @@ public class Patch extends JPanel implements MouseListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        patchColor = e.getComponent().getBackground();
-        e.getComponent().setBackground(new Color(240,230,140));
-        if (busy){
-            e.getComponent().setBackground(Color.green);
+        if (!selected) {
+            patchColor = e.getComponent().getBackground();
+            e.getComponent().setBackground(new Color(240, 230, 140));
+            if (busy) {
+                e.getComponent().setBackground(Color.green);
+            }
         }
-
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
+        if (!selected)
         e.getComponent().setBackground(patchColor);
     }
 }

@@ -11,16 +11,15 @@ import java.io.File;
 import java.io.IOException;
 
 
-public class Baseboard{
+public class Baseboard {
     public static int ScreenWidth = 800;
     public static int ScreenHeight = 800;
     public static int BlockSizeH = ScreenHeight / 8;
     public static int BlockSizeW = ScreenWidth / 8;
-    public Patches patches;
+    public static JLabel jLabel;
 
     public Baseboard(){
         drawfigures();
-
 
     }
 
@@ -74,7 +73,7 @@ public class Baseboard{
 
 
     public static void setfigures( int i, String figure){
-        JLabel jLabel = new JLabel();
+        jLabel = new JLabel();
         BufferedImage img = null;
         try {
             img = ImageIO.read(new File(figure));
@@ -88,9 +87,26 @@ public class Baseboard{
         jLabel.setHorizontalAlignment(JLabel.CENTER);
         Patches.allPatch.get(i-1).add(jLabel);
         Patches.patches.get(i-1).setBusy(true);
-        System.out.println(Patches.allPatch.get(63).getBounds());
 
 
+
+    }
+
+    public void move(int firstPatch, int secondPatch){
+
+        if (Patches.patches.get(firstPatch).isBusy()) {
+            Component component = null;
+            if (Patches.allPatch.get(firstPatch).getComponent(0) instanceof JLabel) {
+                component = Patches.allPatch.get(firstPatch).getComponent(0);
+                Patches.allPatch.get(firstPatch).remove(component);
+                Patches.allPatch.get(secondPatch).add(component);
+            }
+            Main.frame.setVisible(true);
+            Patches.patches.get(firstPatch).setBusy(false);
+            Patches.patches.get(secondPatch ).setBusy(true);
+            SwingUtilities.updateComponentTreeUI(Main.frame);
+            Patches.patches.get(firstPatch).setBusy(false);
+        }
 
     }
 

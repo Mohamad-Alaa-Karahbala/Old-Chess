@@ -17,6 +17,9 @@ public class Patches extends JPanel {
     public static ArrayList<JPanel> allPatch = new ArrayList<JPanel>(65);
     public Color patchColor = new Color(0x000000);
     public boolean selected = false;
+    public static boolean mode = false;
+    public static int first;
+    public static int second;
 
 
 
