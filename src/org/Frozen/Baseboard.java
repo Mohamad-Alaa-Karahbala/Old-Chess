@@ -99,7 +99,11 @@ public class Baseboard {
             if (Patches.allPatch.get(firstPatch).getComponent(0) instanceof JLabel) {
                 component = Patches.allPatch.get(firstPatch).getComponent(0);
                 Patches.allPatch.get(firstPatch).remove(component);
+                if (Patches.patches.get(secondPatch).isBusy()) {
+                    Patches.allPatch.get(secondPatch).remove(0);
+                }
                 Patches.allPatch.get(secondPatch).add(component);
+
             }
             Main.frame.setVisible(true);
             Patches.patches.get(firstPatch).setBusy(false);
