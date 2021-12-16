@@ -51,20 +51,17 @@ public class Patch extends JPanel implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         if (!Patches.mode){
-            for (int i = 0;i <= 63; i++){
-                if (Patches.patches.get(i).getjPanel() == e.getComponent()){
-                    System.out.println("1");
-                    Patches.first = i;
-                }
-            }
+            long startTime = System.nanoTime();
+            System.out.println("1");
+            Patches.first = Patches.allPatch.indexOf(e.getComponent());
+            long endTime   = System.nanoTime();
+            long totalTime = endTime - startTime;
+            System.out.println(totalTime);
+
         }else {
-            for (int i = 0;i <= 63; i++){
-                if (Patches.patches.get(i).getjPanel() == e.getComponent()) {
-                    System.out.println("2");
-                    Patches.second = i;
-                    Main.baseboard.move(Patches.first,Patches.second);
-                }
-            }
+            System.out.println("2");
+            Patches.second = Patches.allPatch.indexOf(e.getComponent());
+            Main.baseboard.move(Patches.first,Patches.second);
         }
         Patches.mode = !Patches.mode;
     }

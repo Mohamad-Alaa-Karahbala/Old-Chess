@@ -16,7 +16,7 @@ public class Baseboard {
     public static int ScreenHeight = 800;
     public static int BlockSizeH = ScreenHeight / 8;
     public static int BlockSizeW = ScreenWidth / 8;
-    public static JLabel jLabel;
+    public JLabel jLabel;
 
     public Baseboard(){
         drawfigures();
@@ -72,7 +72,7 @@ public class Baseboard {
 
 
 
-    public static void setfigures( int i, String figure){
+    public void setfigures( int i, String figure){
         jLabel = new JLabel();
         BufferedImage img = null;
         try {
