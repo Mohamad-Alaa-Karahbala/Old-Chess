@@ -60,8 +60,12 @@ public class Patch extends JPanel implements MouseListener {
 
         }else {
             System.out.println("2");
+            long startTime = System.nanoTime();
             Patches.second = Patches.allPatch.indexOf(e.getComponent());
             Main.baseboard.move(Patches.first,Patches.second);
+            long endTime   = System.nanoTime();
+            long totalTime = endTime - startTime;
+            System.out.println(totalTime);
         }
         Patches.mode = !Patches.mode;
     }

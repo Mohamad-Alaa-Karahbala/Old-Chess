@@ -29,43 +29,18 @@ public class Baseboard {
 
         for (int i = 1;i <= 64;i++){
             switch (i) {
-                case 1,8:
-                    setfigures(i ,"figures/RookB.png");
-                    break;
-                case 2,7:
-                    setfigures(i ,"figures/KnightB.png");
-                    break;
-                case 3,6:
-                    setfigures(i ,"figures/BishopB.png");
-                    break;
-                case 5:
-                    setfigures(i ,"figures/KingB.png");
-                    break;
-                case 4:
-                    setfigures(i ,"figures/QweenB.png");
-                    break;
-                case 49,50,51,52,53,54,55,56:
-                    setfigures(i ,"figures/PawnW.png");
-                    break;
-                case 57,64:
-                    setfigures(i ,"figures/RookW.png");
-                    break;
-                case 58,63:
-                    setfigures(i ,"figures/KnightW.png");
-                    break;
-                case 59,62:
-                    setfigures(i ,"figures/BishopW.png");
-                    break;
-                case 61:
-                    setfigures(i ,"figures/KingW.png");
-                    break;
-                case 60:
-                    setfigures(i ,"figures/QweenW.png");
-                    break;
-                case 9,10,11,12,13,14,15,16:
-                    setfigures(i ,"figures/PawnB.png");
-                    break;
-
+                case 1, 8 -> setfigures(i, "figures/RookB.png");
+                case 2, 7 -> setfigures(i, "figures/KnightB.png");
+                case 3, 6 -> setfigures(i, "figures/BishopB.png");
+                case 5 -> setfigures(i, "figures/KingB.png");
+                case 4 -> setfigures(i, "figures/QweenB.png");
+                case 49, 50, 51, 52, 53, 54, 55, 56 -> setfigures(i, "figures/PawnW.png");
+                case 57, 64 -> setfigures(i, "figures/RookW.png");
+                case 58, 63 -> setfigures(i, "figures/KnightW.png");
+                case 59, 62 -> setfigures(i, "figures/BishopW.png");
+                case 61 -> setfigures(i, "figures/KingW.png");
+                case 60 -> setfigures(i, "figures/QweenW.png");
+                case 9, 10, 11, 12, 13, 14, 15, 16 -> setfigures(i, "figures/PawnB.png");
             }
         }
     }
@@ -93,6 +68,8 @@ public class Baseboard {
     }
 
     public void move(int firstPatch, int secondPatch){
+        Patch firstPlayer = Patches.patches.get(firstPatch);
+        Patch secondPlayer = Patches.patches.get(secondPatch);
 
         if (Patches.patches.get(firstPatch).isBusy()) {
             Component component = null;
@@ -106,10 +83,10 @@ public class Baseboard {
 
             }
             Main.frame.setVisible(true);
-            Patches.patches.get(firstPatch).setBusy(false);
-            Patches.patches.get(secondPatch ).setBusy(true);
+            firstPlayer.setBusy(false);
+            secondPlayer.setBusy(true);
+            firstPlayer.setBusy(false);
             SwingUtilities.updateComponentTreeUI(Main.frame);
-            Patches.patches.get(firstPatch).setBusy(false);
         }
 
     }
